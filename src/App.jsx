@@ -1,7 +1,16 @@
-import { useState } from "react";
+
+import React from 'react';
+import TreePage from './Components/treePage/TreePage';
 
 function App() {
-  return <></>;
+
+
+  return (
+    <>
+    <TreePage/>
+    </>
+  
+  );
 }
 
 export default App;

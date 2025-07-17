@@ -1,0 +1,63 @@
+.familyCard {
+  max-width: 150px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  padding:8px 12px 3px 10px ;
+}
+
+.familyCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.imageFamilyCard {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  overflow: hidden;
+}
+
+.imageFamilyCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-button:hover {
+  background-color: #ffffff;
+}
+
+.name {
+  font-size: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  font-size: 9px;
+  color: #888;
+  margin-left: 5px;
+}
