@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import Tree from "react-d3-tree";
+import FamilyCard from "./familyCard/FamilyCard";
+import PersonDetailsModal from "../personDetailsModal/personDetailsModal";
+import "./Tree.css";
 
 function buildHierarchy(data) {
   const nodes = {};
@@ -28,29 +31,8 @@ const renderCustomNode = ({ nodeDatum }) => {
   const { name, diedDate, image } = nodeDatum;
 
   return (
-    <foreignObject width="200" height="100" x="-100" y="-50">
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          padding: "10px",
-          textAlign: "center",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        }}
-      >
-        <img
-          src={image}
-          alt={name}
-          width="50"
-          height="50"
-          style={{ borderRadius: "50%", marginBottom: "5px" }}
-        />
-        <h4 style={{ margin: "2px 0" }}>{name}</h4>
-        {diedDate && (
-          <p style={{ margin: 0, fontSize: "0.8em", color: "#888" }}>توفي:</p>
-        )}
-      </div>
+    <foreignObject width="200" height="430" x="-100" y="-100">
+      <FamilyCard name={name} deathYear={diedDate} imageUrl={image} />
     </foreignObject>
   );
 };
@@ -58,6 +40,7 @@ const renderCustomNode = ({ nodeDatum }) => {
 export default function FamilyTree({ family }) {
   const treeContainer = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [selectedPerson, setSelectedPerson] = useState(null);
 
   useEffect(() => {
     if (treeContainer.current) {
@@ -78,12 +61,14 @@ export default function FamilyTree({ family }) {
         orientation="vertical"
         pathFunc="diagonal"
         pathClassFunc={() => "custom-link"}
-        translate={{ x: dimensions.width / 2, y: 100 }}
+        translate={{ x: dimensions.width / 2, y: 150 }} // زودنا المسافة من فوق
         renderCustomNodeElement={renderCustomNode}
         zoomable
         zoom={0.8}
         collapsible
+        scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
+        nodeSize={{ x: 140, y: 300 }} // دي أهم حاجة: زودنا المسافة الرأسية بين الـ nodes
       />
     </div>
   );
