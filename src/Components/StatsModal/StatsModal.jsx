@@ -1,18 +1,20 @@
 import React from "react";
-import { Users, Male, Female, Heart } from "lucide-react";  
-
+  import { Users, User, UserRound, Heart } from "lucide-react";  
+ import "./StatsModal.css"
 const StatsCards = ({ family }) => {
   const total = family.length;
-  const males = family.filter(p => p.gender === "ذكر").length;
-  const females = family.filter(p => p.gender === "أنثى").length;
+  const males = family.filter(p => p.type === "male").length;
+  const females = family.filter(p => p.type === "female").length;
   const alive = family.filter(p => !p.daiedDate).length;
 
-  const stats = [
-    { label: "أفراد العائلة", value: total, icon: <Users size={24} /> },
-    { label: "عدد الذكور", value: males, icon: <Male size={24} /> },
-    { label: "عدد الإناث", value: females, icon: <Female size={24} /> },
-    { label: "عدد الأحياء", value: alive, icon: <Heart size={24} /> },
-  ];
+
+const stats = [
+  { label: "أفراد العائلة", value: total, icon: <Users size={24} /> },
+  { label: "عدد الذكور", value: males, icon: <User size={24} /> },       // بديل لـ Male
+  { label: "عدد الإناث", value: females, icon: <UserRound size={24} /> }, // بديل لـ Female
+  { label: "عدد الأحياء", value: alive, icon: <Heart size={24} /> },
+];
+
 
   return (
     <div className="stats-container">
