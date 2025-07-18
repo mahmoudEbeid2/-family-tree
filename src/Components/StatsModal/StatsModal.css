@@ -1,0 +1,32 @@
+.stats-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.stat-card {
+  background-color: #f5eddd;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 100px;
+  text-align: center;
+  color: #226d1e;
+  font-family: Arial, sans-serif;
+  transition: 0.3s;
+}
+
+.stat-card .icon {
+  margin-bottom: 10px;
+}
+
+.stat-card .value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-card .label {
+  font-size: 14px;
+}
