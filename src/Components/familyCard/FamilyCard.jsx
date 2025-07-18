@@ -3,15 +3,19 @@ import { Info } from "lucide-react";
 import "./familyCard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const FamilyCard = ({ person, onShowDetails }) => {
+const FamilyCard = ({ person, onShowDetails, onDisplayPerson }) => {
   const displayYear = person.daiedDate ? `ت : ${person.daiedDate} م` : null;
   const handlePersonClick = () => {
     onShowDetails(person);
   };
+
+  const handelDisplay = () => {
+    onDisplayPerson(person);
+  };
   return (
     <div className="familyCard mx-auto my-3">
       <div className="imageFamilyCard">
-        <img src={person.imageUrl} alt={person.name} />
+        <img onClick={handelDisplay} src={person.imageUrl} alt={person.name} />
         <button
           onClick={handlePersonClick}
           className="details-button"
