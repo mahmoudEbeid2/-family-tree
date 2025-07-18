@@ -1,22 +1,19 @@
-import React from 'react';
-import { Info } from 'lucide-react';
+import React from "react";
+import { Info } from "lucide-react";
 import "./familyCard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const FamilyCard = ({
-  imageUrl ,
-  name ,
-  deathYear ,
-  onShowDetails = () => {}
-}) => {
-  const displayYear = deathYear ? `ت : ${deathYear} م` : null;
-
+const FamilyCard = ({ person, onShowDetails }) => {
+  const displayYear = person.daiedDate ? `ت : ${person.daiedDate} م` : null;
+  const handlePersonClick = () => {
+    onShowDetails(person);
+  };
   return (
     <div className="familyCard mx-auto my-3">
       <div className="imageFamilyCard">
-        <img src={imageUrl} alt={name} />
+        <img src={person.imageUrl} alt={person.name} />
         <button
-          onClick={onShowDetails}
+          onClick={handlePersonClick}
           className="details-button"
           aria-label="عرض التفاصيل"
         >
@@ -25,7 +22,7 @@ const FamilyCard = ({
       </div>
 
       <div className="p-2 text-center" dir="rtl">
-        <h5 className="mb-1 text-dark name">{name}</h5>
+        <h5 className="mb-1 text-dark name">{person.name}</h5>
         {displayYear && <p className="date mb-0">{displayYear}</p>}
       </div>
     </div>

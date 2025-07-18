@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { X, Facebook, Mail, Phone } from 'lucide-react';
-import './PersonDetailsModal.css';
+import React, { useState } from "react";
+import { X, Facebook, Mail, Phone } from "lucide-react";
+import "./PersonDetailsModal.css";
 
 const PersonDetailsModal = ({ person, onClose }) => {
-  const [activeTab, setActiveTab] = useState('info');
+  const [activeTab, setActiveTab] = useState("info");
+  const [enlargedPhoto, setEnlargedPhoto] = useState(null);
 
-  const age = person.deathYear 
-    ? person.deathYear - person.birthYear 
+  const age = person.deathYear
+    ? person.deathYear - person.birthYear
     : new Date().getFullYear() - person.birthYear;
 
   return (
@@ -15,65 +16,136 @@ const PersonDetailsModal = ({ person, onClose }) => {
         <X size={20} />
       </button>
 
-    <div className="right">
-          <img src={person.imageUrl} alt={person.name} className="person-img" />
-      <h4 className="person-name centered-name">{person.name}</h4>
+      <div className="right">
+        <img src={person.imageUrl} alt={person.name} className="person-img" />
+        <h4 className="person-name centered-name">{person.name}</h4>
 
         <div className="social-icons centered-icons">
-          <Facebook size={18} />
-          <Mail size={18} />
-          <Phone size={18} />
+          <a
+            href={`${person.contact.facebook}|| "https://www.facebook.com/"}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon facebook"
+          >
+            <Facebook size={14} />
+          </a>
+          <a href={`mailto:${person.contact.mail}`} className="icon mail">
+            <Mail size={14} />
+          </a>
+          <a href={`tel:${person.contact.phone}`} className="icon phone">
+            <Phone size={14} />
+          </a>
         </div>
-    </div>
-      <div className="person-info-area">
-        
+      </div>
 
+      <div className="person-info-area">
         <ul className="nav nav-tabs mb-2">
           <li className="nav-item">
-            <button className={`nav-link ${activeTab === 'info' ? 'active' : ''}`} onClick={() => setActiveTab('info')}>
+            <button
+              className={`nav-link ${activeTab === "info" ? "active" : ""}`}
+              onClick={() => setActiveTab("info")}
+            >
               عرض البيانات
             </button>
           </li>
           <li className="nav-item">
-            <button className={`nav-link ${activeTab === 'bio' ? 'active' : ''}`} onClick={() => setActiveTab('bio')}>
+            <button
+              className={`nav-link ${activeTab === "bio" ? "active" : ""}`}
+              onClick={() => setActiveTab("bio")}
+            >
               السيرة الذاتية
             </button>
           </li>
           <li className="nav-item">
-            <button className={`nav-link ${activeTab === 'photos' ? 'active' : ''}`} onClick={() => setActiveTab('photos')}>
+            <button
+              className={`nav-link ${activeTab === "photos" ? "active" : ""}`}
+              onClick={() => setActiveTab("photos")}
+            >
               الصور
             </button>
           </li>
         </ul>
 
         <div className="tab-content">
-          {activeTab === 'info' && (
-           <div className="info-grid">
-  <div className="info-column">
-    <p><strong>المهنة:</strong> {person.job}</p>
-    <p><strong>عدد الأبناء:</strong> {person.childrenCount}</p>
-    <p><strong>المدينة:</strong> {person.city}</p>
-    <p><strong>المنطقة:</strong> {person.region}</p>
-  </div>
-  <div className="info-column">
-    <p><strong>تاريخ الميلاد:</strong> {person.birthYear}</p>
-    <p><strong>تاريخ الوفاة:</strong> {person.deathYear || '---'}</p>
-    <p><strong>الحالة الاجتماعية:</strong> {person.maritalStatus || 'متزوج'}</p>
-    <p><strong>العمر:</strong> {age} سنة</p>
-  </div>
-</div>
-
+          {activeTab === "info" && (
+            <div className="info-grid">
+              <div className="info-column">
+                <p>
+                  <span className="data">المهنة:</span>{" "}
+                  <span className="dataEntery">{person.job}</span>
+                </p>
+                <p>
+                  <span className="data">عدد الأبناء:</span>{" "}
+                  <span className="dataEntery">{person.children.length}</span>
+                </p>
+                <p>
+                  <span className="data">المدينة:</span>{" "}
+                  <span className="dataEntery">{person.city}</span>
+                </p>
+                <p>
+                  <span className="data">المنطقة:</span>{" "}
+                  <span className="dataEntery">{person.region}</span>
+                </p>
+              </div>
+              <div className="info-column">
+                <p>
+                  <span className="data">تاريخ الميلاد:</span>{" "}
+                  <span className="dataEntery">{person.birthYear}</span>
+                </p>
+                <p>
+                  <span className="data">تاريخ الوفاة:</span>{" "}
+                  <span className="dataEntery">
+                    {person.daiedDate || "---"}
+                  </span>
+                </p>
+                <p>
+                  <span className="data">الحالة الاجتماعية:</span>{" "}
+                  <span className="dataEntery">
+                    {person.maritalStatus || "---"}
+                  </span>
+                </p>
+                <p>
+                  <span className="data">العمر:</span>{" "}
+                  <span className="dataEntery">{age} سنة</span>
+                </p>
+              </div>
+            </div>
           )}
-          {activeTab === 'bio' && <p>{person.bio}</p>}
-          {activeTab === 'photos' && (
+
+          {activeTab === "bio" && <p>{person.bio}</p>}
+
+          {activeTab === "photos" && (
             <div className="d-flex flex-wrap">
-              {person.photos.length > 0 ? person.photos.map((img, i) => (
-                <img key={i} src={img} alt={`photo-${i}`} className="photo-thumb" />
-              )) : <p>لا توجد صور متاحة</p>}
+              {person.photos.length > 0 ? (
+                person.photos.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`photo-${i}`}
+                    className="photo-thumb"
+                    onClick={() => setEnlargedPhoto(img)}
+                    style={{ cursor: "zoom-in" }}
+                  />
+                ))
+              ) : (
+                <p>لا توجد صور متاحة</p>
+              )}
             </div>
           )}
         </div>
       </div>
+
+      {enlargedPhoto && (
+        <div className="photo-overlay" onClick={() => setEnlargedPhoto(null)}>
+          <button
+            className="close-enlarged"
+            onClick={() => setEnlargedPhoto(null)}
+          >
+            <X size={24} />
+          </button>
+          <img src={enlargedPhoto} alt="enlarged" className="enlarged-img" />
+        </div>
+      )}
     </div>
   );
 };

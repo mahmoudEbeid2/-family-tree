@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FamilyCard from "../familyCard/FamilyCard";
 import PersonDetailsModal from "../personDetailsModal/personDetailsModal";
-import "./Tree.css";
+// import "./Tree.css";
 
 const TreePage = () => {
   const [selectedPerson, setSelectedPerson] = useState(null);

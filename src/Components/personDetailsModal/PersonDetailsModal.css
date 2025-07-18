@@ -1,4 +1,5 @@
-.blur-layer, .person-modal-blur-layer {
+.blur-layer,
+.person-modal-blur-layer {
   position: fixed;
   top: 0;
   left: 0;
@@ -25,15 +26,14 @@
   display: flex;
   flex-direction: row-reverse;
   background-color: #fff;
-  border-radius: 12px;
-  max-width: 850px;
+  border-radius: 40px;
+  max-width: 700px;
   width: 95%;
-  padding: 40px ;
+  padding: 40px;
   position: relative;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   z-index: 10000;
 }
-
 
 .close-btn {
   position: absolute;
@@ -52,16 +52,14 @@
 
 .person-img {
   width: 200px;
-  height: 200px;
+  height: 180px;
   border-radius: 14px;
   object-fit: cover;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-.right{
 
-}
 .person-info-area {
   flex: 1;
   display: flex;
@@ -77,9 +75,9 @@
 }
 
 .person-name {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   color: #222;
 }
 
@@ -154,7 +152,7 @@
   font-size: 16px;
   color: #888;
   font-weight: 500;
-  padding: 0 0 10px 0;
+  padding: 5px;
   cursor: pointer;
   border-radius: 0;
   border-bottom: 2.5px solid transparent;
@@ -184,7 +182,85 @@
   object-fit: cover;
   margin: 6px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+}
+
+.photo-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enlarged-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.close-enlarged {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+}
+.social-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.social-icons .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f0f0f0; /* الخلفية الرمادي الفاتح */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 6px;
+  font-size: 14px;
+}
+
+/* لون الأيقونات */
+.social-icons .facebook svg {
+  color: #1877f2; /* أزرق فيسبوك */
+}
+
+.social-icons .mail svg {
+  color: #ea4335; /* أحمر Gmail */
+}
+
+.social-icons .phone svg {
+  color: #34a853; /* أخضر واتساب أو تليفون */
+}
+.data {
+  font-weight: 500;
+  font-size: 12;
+}
+.dataEntery {
+  font-weight: 300;
+  font-size: 12;
+  color: #474748;
+}
+/* Optional hover effect */
+.social-icons .icon:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transition: 0.2s ease;
 }
 
 /* Responsive adjustments */

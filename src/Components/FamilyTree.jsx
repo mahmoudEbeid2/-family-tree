@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
-import PersonDetailsModal from "../personDetailsModal/personDetailsModal";
-import "./Tree.css";
+import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 
 function buildHierarchy(data) {
   const nodes = {};
@@ -27,12 +26,10 @@ function buildHierarchy(data) {
   return nodes[rootId];
 }
 
-const renderCustomNode = ({ nodeDatum }) => {
-  const { name, diedDate, image } = nodeDatum;
-
+const renderCustomNode = ({ nodeDatum }, handlePersonClick) => {
   return (
     <foreignObject width="200" height="430" x="-100" y="-100">
-      <FamilyCard name={name} deathYear={diedDate} imageUrl={image} />
+      <FamilyCard person={nodeDatum} onShowDetails={handlePersonClick} />
     </foreignObject>
   );
 };
@@ -51,6 +48,10 @@ export default function FamilyTree({ family }) {
 
   const treeData = buildHierarchy(family);
 
+  function handlePersonClick(person) {
+    setSelectedPerson(person);
+  }
+
   return (
     <div
       ref={treeContainer}
@@ -61,15 +62,29 @@ export default function FamilyTree({ family }) {
         orientation="vertical"
         pathFunc="diagonal"
         pathClassFunc={() => "custom-link"}
-        translate={{ x: dimensions.width / 2, y: 150 }} // زودنا المسافة من فوق
-        renderCustomNodeElement={renderCustomNode}
+        translate={{ x: dimensions.width / 2, y: 150 }}
+        renderCustomNodeElement={(rd3tProps) =>
+          renderCustomNode(rd3tProps, handlePersonClick)
+        }
         zoomable
         zoom={0.8}
         collapsible
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 140, y: 300 }} // دي أهم حاجة: زودنا المسافة الرأسية بين الـ nodes
+        nodeSize={{ x: 140, y: 300 }}
       />
+
+      {selectedPerson && (
+        <>
+          <div className="blur-layer"></div>
+          <div className="person-modal-overlay">
+            <PersonDetailsModal
+              person={selectedPerson}
+              onClose={() => setSelectedPerson(null)}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
