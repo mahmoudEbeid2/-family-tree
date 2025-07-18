@@ -28,7 +28,7 @@ function buildHierarchy(data) {
 
 const renderCustomNode = ({ nodeDatum }, handlePersonClick) => {
   return (
-    <foreignObject width="200" height="430" x="-100" y="-100">
+    <foreignObject width="200" height="430" x="-100" y="-70">
       <FamilyCard person={nodeDatum} onShowDetails={handlePersonClick} />
     </foreignObject>
   );
@@ -71,7 +71,7 @@ export default function FamilyTree({ family }) {
         collapsible
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 140, y: 300 }}
+        nodeSize={{ x: 140, y: 260 }}
       />
 
       {selectedPerson && (

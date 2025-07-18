@@ -261,7 +261,6 @@ export const family = [
   {
     id: 11,
     name: "محمد سعيد 1",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
@@ -287,7 +286,6 @@ export const family = [
   {
     id: 12,
     name: "محمد سعيد 2",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
@@ -313,7 +311,6 @@ export const family = [
   {
     id: 13,
     name: "محمد سعيد 3",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
@@ -339,7 +336,6 @@ export const family = [
   {
     id: 14,
     name: "محمد سعيد 4",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
@@ -365,7 +361,6 @@ export const family = [
   {
     id: 15,
     name: "محمد سعيد 5",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
@@ -391,7 +386,6 @@ export const family = [
   {
     id: 16,
     name: "محمد سعيد 6",
-    name: "آدم سعيد",
     imageUrl: `https://thispersondoesnotexist.com/?rand=${Math.random() * 10}`,
     birthYear: 1950,
     daiedDate: null,
