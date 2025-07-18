@@ -3,7 +3,6 @@ import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 
-// مكون مخصص لعرض كل نود (شخص)
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   return (
     <foreignObject width="200" height="430" x="-100" y="-160">
@@ -22,12 +21,9 @@ export default function FamilyTree({ family }) {
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [expandedNodes, setExpandedNodes] = useState({});
 
-  // الشخص الرئيسي في الشجرة (الجذر)
   const rootPerson = family.find((person) => person.id === 1);
 
-  // بناء الشجرة بشكل ديناميكي حسب الأشخاص المفتوحة (expanded)
   function buildTree(person) {
-    // لو الشخص مش موجود في expandedNodes والجذر مش id=1، متجبش أولاده
     const isExpanded = expandedNodes[person.id];
 
     const children = isExpanded
@@ -45,18 +41,11 @@ export default function FamilyTree({ family }) {
 
   const treeData = buildTree(rootPerson);
 
-  // عند الضغط على زر التفاصيل
   function handlePersonClick(person) {
     setSelectedPerson(person);
   }
 
-  // عند الضغط على الصورة لعرض أولاده
-  //   function handleDisplay(person) {
-  //     setExpandedNodes((prev) => ({
-  //       ...prev,
-  //       [person.id]: true,
-  //     }));
-  //   }
+ 
 
   function handleDisplay(person) {
     setExpandedNodes((prev) => ({
@@ -65,7 +54,6 @@ export default function FamilyTree({ family }) {
     }));
   }
 
-  // لحساب أبعاد العنصر الحاوي (الشجرة)
   useEffect(() => {
     if (treeContainer.current) {
       const { width, height } = treeContainer.current.getBoundingClientRect();

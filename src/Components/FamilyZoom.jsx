@@ -15,7 +15,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   );
 };
 
-export default function FamilyTree({ family }) {
+export default function FamilyZoom({ family }) {
   const treeContainer = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -40,7 +40,6 @@ export default function FamilyTree({ family }) {
 
     const isExpanded = expandedNodes[person.id];
 
-    // 👇 ده الشرط المعدل عشان يشتغل مظبوط
     if (
       activePersonId &&
       person.id !== activePersonId &&
@@ -69,10 +68,10 @@ export default function FamilyTree({ family }) {
   }
 
   function handleDisplay(person) {
-    setActivePersonId(person.id); // تحديد الشخص النشط
+    setActivePersonId(person.id);
     setExpandedNodes((prev) => ({
       ...prev,
-      [person.id]: !prev[person.id], // فتح/غلق أبناؤه
+      [person.id]: !prev[person.id],
     }));
   }
 
