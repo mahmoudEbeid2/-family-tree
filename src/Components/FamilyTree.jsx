@@ -3,33 +3,15 @@ import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 
-function buildHierarchy(data) {
-  const nodes = {};
-  const rootCandidates = new Set(data.map((d) => d.id));
-
-  data.forEach((item) => {
-    nodes[item.id] = { ...item, children: [] };
-  });
-
-  data.forEach((item) => {
-    if (item.children && item.children.length > 0) {
-      item.children.forEach((childId) => {
-        if (nodes[childId]) {
-          nodes[item.id].children.push(nodes[childId]);
-          rootCandidates.delete(childId);
-        }
-      });
-    }
-  });
-
-  const rootId = [...rootCandidates][0];
-  return nodes[rootId];
-}
-
-const renderCustomNode = ({ nodeDatum }, handlePersonClick) => {
+// مكون مخصص لعرض كل نود (شخص)
+const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   return (
-    <foreignObject width="200" height="430" x="-100" y="-70">
-      <FamilyCard person={nodeDatum} onShowDetails={handlePersonClick} />
+    <foreignObject width="200" height="430" x="-100" y="-160">
+      <FamilyCard
+        person={nodeDatum}
+        onShowDetails={() => handlePersonClick(nodeDatum)}
+        onDisplayPerson={() => handleDisplay(nodeDatum)}
+      />
     </foreignObject>
   );
 };
@@ -38,19 +20,58 @@ export default function FamilyTree({ family }) {
   const treeContainer = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [expandedNodes, setExpandedNodes] = useState({});
 
+  // الشخص الرئيسي في الشجرة (الجذر)
+  const rootPerson = family.find((person) => person.id === 1);
+
+  // بناء الشجرة بشكل ديناميكي حسب الأشخاص المفتوحة (expanded)
+  function buildTree(person) {
+    // لو الشخص مش موجود في expandedNodes والجذر مش id=1، متجبش أولاده
+    const isExpanded = expandedNodes[person.id];
+
+    const children = isExpanded
+      ? (person.children || [])
+          .map((childId) => {
+            const child = family.find((p) => p.id === childId);
+            if (!child) return null;
+            return buildTree(child);
+          })
+          .filter(Boolean)
+      : [];
+
+    return { ...person, children };
+  }
+
+  const treeData = buildTree(rootPerson);
+
+  // عند الضغط على زر التفاصيل
+  function handlePersonClick(person) {
+    setSelectedPerson(person);
+  }
+
+  // عند الضغط على الصورة لعرض أولاده
+  //   function handleDisplay(person) {
+  //     setExpandedNodes((prev) => ({
+  //       ...prev,
+  //       [person.id]: true,
+  //     }));
+  //   }
+
+  function handleDisplay(person) {
+    setExpandedNodes((prev) => ({
+      ...prev,
+      [person.id]: !prev[person.id],
+    }));
+  }
+
+  // لحساب أبعاد العنصر الحاوي (الشجرة)
   useEffect(() => {
     if (treeContainer.current) {
       const { width, height } = treeContainer.current.getBoundingClientRect();
       setDimensions({ width, height });
     }
   }, []);
-
-  const treeData = buildHierarchy(family);
-
-  function handlePersonClick(person) {
-    setSelectedPerson(person);
-  }
 
   return (
     <div
@@ -64,14 +85,14 @@ export default function FamilyTree({ family }) {
         pathClassFunc={() => "custom-link"}
         translate={{ x: dimensions.width / 2, y: 150 }}
         renderCustomNodeElement={(rd3tProps) =>
-          renderCustomNode(rd3tProps, handlePersonClick)
+          renderCustomNode(rd3tProps, handlePersonClick, handleDisplay)
         }
         zoomable
         zoom={0.8}
-        collapsible
+        collapsible={false}
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 140, y: 260 }}
+        nodeSize={{ x: 140, y: 450 }}
       />
 
       {selectedPerson && (

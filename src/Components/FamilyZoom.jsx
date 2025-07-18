@@ -3,10 +3,9 @@ import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 
-// مكون مخصص لعرض كل نود (شخص)
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   return (
-    <foreignObject width="200" height="430" x="-100" y="-160">
+    <foreignObject width="200" height="430" x="-100" y="-100">
       <FamilyCard
         person={nodeDatum}
         onShowDetails={() => handlePersonClick(nodeDatum)}
@@ -21,20 +20,40 @@ export default function FamilyTree({ family }) {
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [expandedNodes, setExpandedNodes] = useState({});
+  const [activePersonId, setActivePersonId] = useState(null);
 
-  // الشخص الرئيسي في الشجرة (الجذر)
   const rootPerson = family.find((person) => person.id === 1);
 
-  // بناء الشجرة بشكل ديناميكي حسب الأشخاص المفتوحة (expanded)
+  function isInPathToActive(currentId, targetId) {
+    if (currentId === targetId) return true;
+
+    const parent = family.find((p) => (p.children || []).includes(targetId));
+    if (!parent) return false;
+
+    if (parent.id === currentId) return true;
+
+    return isInPathToActive(currentId, parent.id);
+  }
+
   function buildTree(person) {
-    // لو الشخص مش موجود في expandedNodes والجذر مش id=1، متجبش أولاده
+    if (!person) return null;
+
     const isExpanded = expandedNodes[person.id];
+
+    // 👇 ده الشرط المعدل عشان يشتغل مظبوط
+    if (
+      activePersonId &&
+      person.id !== activePersonId &&
+      !isInPathToActive(person.id, activePersonId) &&
+      !isInPathToActive(activePersonId, person.id)
+    ) {
+      return null;
+    }
 
     const children = isExpanded
       ? (person.children || [])
           .map((childId) => {
             const child = family.find((p) => p.id === childId);
-            if (!child) return null;
             return buildTree(child);
           })
           .filter(Boolean)
@@ -45,27 +64,18 @@ export default function FamilyTree({ family }) {
 
   const treeData = buildTree(rootPerson);
 
-  // عند الضغط على زر التفاصيل
   function handlePersonClick(person) {
     setSelectedPerson(person);
   }
 
-  // عند الضغط على الصورة لعرض أولاده
-  //   function handleDisplay(person) {
-  //     setExpandedNodes((prev) => ({
-  //       ...prev,
-  //       [person.id]: true,
-  //     }));
-  //   }
-
   function handleDisplay(person) {
+    setActivePersonId(person.id); // تحديد الشخص النشط
     setExpandedNodes((prev) => ({
       ...prev,
-      [person.id]: !prev[person.id],
+      [person.id]: !prev[person.id], // فتح/غلق أبناؤه
     }));
   }
 
-  // لحساب أبعاد العنصر الحاوي (الشجرة)
   useEffect(() => {
     if (treeContainer.current) {
       const { width, height } = treeContainer.current.getBoundingClientRect();
@@ -92,7 +102,7 @@ export default function FamilyTree({ family }) {
         collapsible={false}
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 140, y: 450 }}
+        nodeSize={{ x: 180, y: 320 }}
       />
 
       {selectedPerson && (
