@@ -1,0 +1,10 @@
+.people-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+  background-color: #F5E6CA;
+  overflow: auto;
+
+}

@@ -1,0 +1,83 @@
+.person-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  direction: rtl;
+  text-align: right;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  transition: 0.3s;
+}
+
+
+.person-card:hover {
+  transform: translateY(-5px);
+}
+
+.circle-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eee;
+  margin-bottom: 10px;
+display: flex;  margin: auto;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  justify-content: center;
+    display: flex;
+
+}
+
+.info p {
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+.icons-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: start;
+  gap: 12px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #f2f2f2;
+  border-radius: 50%;
+}
+
+.facebook {
+  color: #1877f2;
+}
+
+.mail {
+  color: #c71610;
+}
+.phone  {
+  color: #34a853; 
+}
+@media (max-width: 410px) {
+  .person-card {
+    flex-direction: column; 
+    gap: 0px;              
+    text-align: center;     
+    align-items: center;
+max-width: 230px;  }
+.name {
+  margin-bottom: 5px;
+
+}
+}

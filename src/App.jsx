@@ -5,7 +5,16 @@ import TreePage from "./Components/treePage/TreePage";
 import FamilyZoom from "./Components/FamilyZoom";
 
 function App() {
+<<<<<<< HEAD
   return <FamilyZoom family={family} />;
+=======
+  
+  return (
+    <FamilyTree family={family} />
+
+    
+  );
+>>>>>>> e78cc9bf4cf4ef187338f994c11b0219285e2324
 }
 
 export default App;

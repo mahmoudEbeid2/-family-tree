@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const FamilyCard = ({ person, onShowDetails, onDisplayPerson }) => {
   const displayYear = person.daiedDate ? `ت : ${person.daiedDate} م` : null;
+
   const handlePersonClick = () => {
     onShowDetails(person);
   };
