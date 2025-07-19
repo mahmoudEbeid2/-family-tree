@@ -3,14 +3,32 @@ import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 
+// دالة للتحقق إذا الجهاز iOS
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
+  if (isIOS) {
+    // fallback SVG node
+    return (
+      <g onClick={() => handleDisplay(nodeDatum)} style={{ cursor: "pointer" }}>
+        <circle r="40" fill="#6c63ff" />
+        <text fill="#fff" x="-30" y="5" fontSize={14}>
+          {nodeDatum.name}
+        </text>
+      </g>
+    );
+  }
+
+  // التصميم الأساسي لغير iOS
   return (
     <foreignObject width="200" height="430" x="-100" y="-160">
-      <FamilyCard
-        person={nodeDatum}
-        onShowDetails={() => handlePersonClick(nodeDatum)}
-        onDisplayPerson={() => handleDisplay(nodeDatum)}
-      />
+      <div style={{ width: "200px", height: "430px" }}>
+        <FamilyCard
+          person={nodeDatum}
+          onShowDetails={() => handlePersonClick(nodeDatum)}
+          onDisplayPerson={() => handleDisplay(nodeDatum)}
+        />
+      </div>
     </foreignObject>
   );
 };
