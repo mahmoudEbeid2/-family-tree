@@ -6,12 +6,12 @@ import InfoCon from "../assets/Info.svg";
 
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
-  if (isIOS) {
+  if (!isIOS) {
     // fallback SVG node
     return (
       <g style={{ cursor: "pointer" }}>
         <rect
-          x="-60"
+          x="-80"
           y="-30"
           width="150"
           height="180"
@@ -23,14 +23,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
         <image
           onClick={() => handleDisplay(nodeDatum)}
           href={nodeDatum.imageUrl}
-          x="-50"
+          x="-70"
           y="-23"
           width="130"
           height="130"
         />
         <circle
           onClick={() => handlePersonClick(nodeDatum)}
-          cx="66"
+          cx="47"
           cy="-11"
           r="10"
           fill="white"
@@ -39,14 +39,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
         <image
           onClick={() => handlePersonClick(nodeDatum)}
           href={InfoCon}
-          x="58"
+          x="39"
           y="-19"
           width="16"
           height="16"
         />
         <text
           fill="#fff"
-          x="15"
+          x="-5"
           y="124"
           fontSize={11}
           fontFamily="cairo, sans-serif"
@@ -67,7 +67,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
         </text>
         <text
           fill="#888"
-          x="15"
+          x="-5"
           y="140"
           fontSize={8}
           fontFamily="cairo, sans-serif"
