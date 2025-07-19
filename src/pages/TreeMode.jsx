@@ -18,7 +18,7 @@ function TreeMode({ family, showNavbar }) {
   return (
     <div className="tree-mode-container">
       {!isAuthenticated && <PasswordGate onSuccess={handlePasswordSubmit} />}
-      <FamilyTree family={family} showNavbar={showNavbar} />}
+      <FamilyTree family={family} showNavbar={showNavbar} />
     </div>
   );
 }

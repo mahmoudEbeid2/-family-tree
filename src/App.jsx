@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { family, family_name } from "./data/family";
 import { useState } from "react";
 import TreeMode from "./pages/TreeMode";
-import CardsPage from "./pages/cardsPage";
+import CardsPage from "./pages/CardsPage";
 import FoucsMode from "./pages/FoucsMode";
 import NavbarComponent from "./Components/Navbar/Navbar";
 function App() {
