@@ -1,22 +1,25 @@
 import FamilyTree from "../Components/FamilyTree";
 import PasswordGate from "../Components/PasswordGate/PasswordGate";
-import { useState } from "react";
-function TreeMode({ family }) {
-  const [showLogin, setShowLogin] = useState(true);
+import { useState, useEffect } from "react";
+
+function TreeMode({ family, showNavbar }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const isAuth = sessionStorage.getItem("isAuthenticated") === "true";
+    setIsAuthenticated(isAuth);
+  }, []);
 
   function handlePasswordSubmit() {
-    setShowLogin(false);
+    sessionStorage.setItem("isAuthenticated", "true");
+    setIsAuthenticated(true);
   }
 
-  // if (showLogin) {
-  //   return <PasswordGate onSubmit={handlePasswordSubmit} />;
-  // }
   return (
-    <>
-      {showLogin && <PasswordGate onSuccess={handlePasswordSubmit} />}
-
-      <FamilyTree family={family} />
-    </>
+    <div className="tree-mode-container">
+      {!isAuthenticated && <PasswordGate onSuccess={handlePasswordSubmit} />}
+      <FamilyTree family={family} showNavbar={showNavbar} />}
+    </div>
   );
 }
 

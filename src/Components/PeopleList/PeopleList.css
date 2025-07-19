@@ -1,11 +1,14 @@
+/* ملف CSS */
+.people-container {
+  background-color: #f5e6ca;
+  padding: 40px 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 .people-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  padding: 40px 20px;
-  background-color: #f5e6ca;
-  overflow: auto;
-  width: 100%;
-  height: 100vh;
 }

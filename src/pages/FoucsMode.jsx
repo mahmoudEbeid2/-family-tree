@@ -1,6 +1,6 @@
 import FamilyZoom from "../Components/FamilyZoom";
-function FoucsMode({ family }) {
-  return <FamilyZoom family={family} />;
+function FoucsMode({ family ,showNavbar}) {
+  return <FamilyZoom family={family} showNavbar={showNavbar} />;
 }
 
 export default FoucsMode;

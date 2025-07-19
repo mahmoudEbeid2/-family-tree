@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* overflow: hidden; */
   font-family: "Cairo", sans-serif;
 }
 
@@ -24,4 +23,8 @@
   stroke: white !important;
   stroke-width: 4px !important;
   stroke-dasharray: 0;
+}
+
+.tree-mode-container {
+  overflow: hidden;
 }

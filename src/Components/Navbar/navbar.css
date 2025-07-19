@@ -1,0 +1,38 @@
+.spaces {
+  width: 100%;
+  max-width: 450px;
+  margin-inline: auto;
+}
+
+.search-input:focus {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #6666668a;
+  box-shadow: 0 0 0 0.2rem white;
+  outline: none;
+  background-color: #fff;
+  color: #000;
+}
+
+@media (min-width: 1280px) {
+  .spaces {
+    margin-right: 80px;
+    margin-left: 40px;
+  }
+}
+
+.nav-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (max-width: 991px) {
+  .spaces {
+    margin: 10px 0;
+  }
+  .nav-icons {
+    margin-top: 10px;
+  }
+}

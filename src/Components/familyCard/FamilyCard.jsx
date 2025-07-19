@@ -27,7 +27,7 @@ const FamilyCard = ({ person, onShowDetails, onDisplayPerson }) => {
       </div>
 
       <div className="p-2 text-center" dir="rtl">
-        <h5 className="mb-1 text-dark name">{person.name}</h5>
+        <h5 className="mb-1 text-dark name-title">{person.name}</h5>
         {displayYear && <p className="date mb-0">{displayYear}</p>}
       </div>
     </div>

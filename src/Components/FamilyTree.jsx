@@ -15,7 +15,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   );
 };
 
-export default function FamilyTree({ family }) {
+export default function FamilyTree({ family, showNavbar }) {
   const treeContainer = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -45,8 +45,6 @@ export default function FamilyTree({ family }) {
     setSelectedPerson(person);
   }
 
- 
-
   function handleDisplay(person) {
     setExpandedNodes((prev) => ({
       ...prev,
@@ -64,7 +62,11 @@ export default function FamilyTree({ family }) {
   return (
     <div
       ref={treeContainer}
-      style={{ width: "100vw", height: "100vh", backgroundColor: "#F5E6CA" }}
+      style={{
+        width: "100vw",
+        height: showNavbar ? "89vh" : "100vh",
+        backgroundColor: "#F5E6CA",
+      }}
     >
       <Tree
         data={treeData}
