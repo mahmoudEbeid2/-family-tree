@@ -1,6 +1,6 @@
 import React from "react";
 import { Facebook, Mail, Phone } from "lucide-react";
-import "./PersonCard.css";
+import "./person.css";
 
 const PersonCard = ({ person }) => {
   return (
