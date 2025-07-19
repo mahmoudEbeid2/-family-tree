@@ -4,12 +4,7 @@ import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 import InfoCon from "../assets/Info.svg";
 
-const isIOS = () => {
-  return (
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-  );
-};
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   if (!isIOS) {
     // fallback SVG node
