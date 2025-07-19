@@ -8,12 +8,11 @@ const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   if (isIOS) {
-    // fallback SVG node
     return (
       <g style={{ cursor: "pointer" }}>
         <rect
           x="-80"
-          y="-30"
+          y="-160"
           width="150"
           height="180"
           rx="0"
@@ -25,14 +24,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           onClick={() => handleDisplay(nodeDatum)}
           href={nodeDatum.imageUrl}
           x="-70"
-          y="-23"
+          y="-150"
           width="130"
           height="130"
         />
         <circle
           onClick={() => handlePersonClick(nodeDatum)}
           cx="47"
-          cy="-11"
+          cy="-135"
           r="10"
           fill="white"
           stroke="none"
@@ -41,14 +40,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           onClick={() => handlePersonClick(nodeDatum)}
           href={InfoCon}
           x="39"
-          y="-19"
+          y="-143"
           width="16"
           height="16"
         />
         <text
           fill="#fff"
           x="-5"
-          y="124"
+          y="-5"
           fontSize={11}
           fontFamily="cairo, sans-serif"
           fontWeight="100"
@@ -69,7 +68,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
         <text
           fill="#888"
           x="-5"
-          y="140"
+          y="10"
           fontSize={8}
           fontFamily="cairo, sans-serif"
           fontWeight="100"
@@ -92,7 +91,6 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
       </g>
     );
   }
-
   return (
     <foreignObject width="200" height="430" x="-100" y="-100">
       <FamilyCard
