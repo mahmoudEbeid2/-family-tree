@@ -2,18 +2,90 @@ import React, { useRef, useState, useEffect } from "react";
 import Tree from "react-d3-tree";
 import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
+import InfoCon from "../assets/Info.svg";
 
-// دالة للتحقق إذا الجهاز iOS
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   if (isIOS) {
     // fallback SVG node
     return (
-      <g onClick={() => handleDisplay(nodeDatum)} style={{ cursor: "pointer" }}>
-        <circle r="40" fill="#6c63ff" />
-        <text fill="#fff" x="-30" y="5" fontSize={14}>
+      <g style={{ cursor: "pointer" }}>
+        <rect
+          x="-60"
+          y="-30"
+          width="150"
+          height="180"
+          rx="0"
+          ry="0"
+          fill="white"
+          stroke="none"
+        />
+        <image
+          onClick={() => handleDisplay(nodeDatum)}
+          href={nodeDatum.imageUrl}
+          x="-50"
+          y="-23"
+          width="130"
+          height="130"
+        />
+        <circle
+          onClick={() => handlePersonClick(nodeDatum)}
+          cx="66"
+          cy="-11"
+          r="10"
+          fill="white"
+          stroke="none"
+        />
+        <image
+          onClick={() => handlePersonClick(nodeDatum)}
+          href={InfoCon}
+          x="58"
+          y="-19"
+          width="16"
+          height="16"
+        />
+        <text
+          fill="#fff"
+          x="15"
+          y="124"
+          fontSize={11}
+          fontFamily="cairo, sans-serif"
+          fontWeight="100"
+          textAnchor="middle"
+          style={{
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            MozUserSelect: "none",
+            msUserSelect: "none",
+            pointerEvents: "none",
+            WebkitTapHighlightColor: "transparent",
+            outline: "none",
+            fontWeight: 100,
+          }}
+        >
           {nodeDatum.name}
+        </text>
+        <text
+          fill="888"
+          x="15"
+          y="140"
+          fontSize={8}
+          fontFamily="cairo, sans-serif"
+          fontWeight="100"
+          textAnchor="middle"
+          style={{
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            MozUserSelect: "none",
+            msUserSelect: "none",
+            pointerEvents: "none",
+            WebkitTapHighlightColor: "transparent",
+            outline: "none",
+            fontWeight: 100,
+          }}
+        >
+          {nodeDatum.daiedDate ? `ت : ${nodeDatum.daiedDate} م` : null}
         </text>
       </g>
     );
