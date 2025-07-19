@@ -28,3 +28,12 @@
 .tree-mode-container {
   overflow: hidden;
 }
+
+svg text {
+  font-weight: 100 !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+}

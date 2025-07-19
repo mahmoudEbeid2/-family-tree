@@ -4,10 +4,14 @@ import FamilyCard from "./familyCard/FamilyCard";
 import PersonDetailsModal from "./personDetailsModal/personDetailsModal";
 import InfoCon from "../assets/Info.svg";
 
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
+const isIOS = () => {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  );
+};
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
-  if (isIOS) {
+  if (!isIOS) {
     // fallback SVG node
     return (
       <g style={{ cursor: "pointer" }}>
@@ -67,7 +71,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           {nodeDatum.name}
         </text>
         <text
-          fill="888"
+          fill="#888"
           x="15"
           y="140"
           fontSize={8}
@@ -75,14 +79,16 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           fontWeight="100"
           textAnchor="middle"
           style={{
+            fontWeight: 50,
+            pointerEvents: "none",
             userSelect: "none",
             WebkitUserSelect: "none",
             MozUserSelect: "none",
             msUserSelect: "none",
-            pointerEvents: "none",
             WebkitTapHighlightColor: "transparent",
             outline: "none",
-            fontWeight: 100,
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
           }}
         >
           {nodeDatum.daiedDate ? `ت : ${nodeDatum.daiedDate} م` : null}
@@ -91,7 +97,6 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
     );
   }
 
-  // التصميم الأساسي لغير iOS
   return (
     <foreignObject width="200" height="430" x="-100" y="-160">
       <div style={{ width: "200px", height: "430px" }}>
