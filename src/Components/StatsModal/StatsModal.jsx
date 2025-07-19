@@ -6,6 +6,9 @@ const StatsCards = ({ family }) => {
   const males = family.filter((p) => p.type === "male").length;
   const females = family.filter((p) => p.type === "female").length;
   const alive = family.filter((p) => !p.daiedDate).length;
+  const males = family.filter((p) => p.type === "male").length;
+  const females = family.filter((p) => p.type === "female").length;
+  const alive = family.filter((p) => !p.daiedDate).length;
 
   const stats = [
     { label: "أفراد العائلة", value: total, icon: <Users size={24} /> },
@@ -29,4 +32,4 @@ const StatsCards = ({ family }) => {
   );
 };
 
-export default StatsCards;
+export default StatsModal;
