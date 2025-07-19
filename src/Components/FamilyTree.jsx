@@ -6,7 +6,7 @@ import InfoCon from "../assets/Info.svg";
 
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
-  if (!isIOS) {
+  if (isIOS) {
     // fallback SVG node
     return (
       <g style={{ cursor: "pointer" }}>
