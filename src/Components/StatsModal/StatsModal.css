@@ -1,15 +1,27 @@
 .stats-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  background-color: rgba(240, 240, 240, 0.74);
+  z-index: 9998;
+}
+.stats-data {
+  display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  padding:50px 10px;
+  padding: 50px 10px;
   border-radius: 40px;
   max-width: 500px;
   width: 95%;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   z-index: 10000;
-
 }
 
 .stat-card {
@@ -22,7 +34,9 @@
   color: #226d1e;
   font-family: Arial, sans-serif;
   transition: 0.3s;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .stat-card .icon {
