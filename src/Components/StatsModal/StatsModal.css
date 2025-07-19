@@ -1,32 +1,86 @@
+.stats-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.stats-modal-content {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px 20px 20px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.stats-modal-header {
+  margin-bottom: 20px;
+}
+
+.stats-modal-header h5 {
+  margin: 0;
+  color: #226d1e;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .stats-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
-  padding:50px 10px;
-  border-radius: 40px;
-  max-width: 500px;
-  width: 95%;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-
 }
 
 .stat-card {
   background-color: #f5eddd;
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 16px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
-  min-width: 100px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  flex: 1 1 120px;
+  max-width: 150px;
   text-align: center;
   color: #226d1e;
-  font-family: Arial, sans-serif;
-  transition: 0.3s;
-  
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
 }
 
 .stat-card .icon {
-  margin-bottom: 2px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+    background: none !important;
 }
 
 .stat-card .value {
