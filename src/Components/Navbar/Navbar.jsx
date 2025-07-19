@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Button, FormControl } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { family_name, family } from "../../data/family";
@@ -15,6 +15,9 @@ import {
 export default function NavbarComponent() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [showStats, setShowStats] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [firstSearch, setFirstSearch] = useState(true); // لتجنب التوجيه التلقائي في البداية
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,11 +25,24 @@ export default function NavbarComponent() {
   const openStats = () => setShowStats(true);
   const closeStats = () => setShowStats(false);
 
+  useEffect(() => {
+    const encodedQuery = encodeURIComponent(searchQuery.trim());
+
+    if (firstSearch) {
+      setFirstSearch(false);
+      return;
+    }
+
+    if (!searchQuery.trim()) return;
+
+    navigate(`/cards?search=${encodedQuery}`, { replace: true });
+  }, [searchQuery]);
+
   const navItems = [
     { icon: <FaChartBar />, path: null, action: openStats },
     { icon: <FaCreditCard />, path: "/cards" },
     { icon: <FaSearchPlus />, path: "/focus" },
-    { icon: <FaTree />, path: "/tree" },
+    { icon: <FaTree />, path: "/" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -34,7 +50,7 @@ export default function NavbarComponent() {
   return (
     <>
       {showNavbar && (
-        <Navbar 
+        <Navbar
           bg="light"
           expand="lg"
           className="px-3 shadow-sm justify-content-between"
@@ -74,17 +90,21 @@ export default function NavbarComponent() {
           </div>
 
           {/* Center: search bar with icon */}
-          <div className="position-relative  " style={{ width: "500px" ,marginRight:"200px"}}>
+          <div
+            className="position-relative"
+            style={{ width: "500px", marginRight: "200px" }}
+          >
             <FormControl
-            dir="rtl"
+              dir="rtl"
               type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث..."
-              className="rounded-pill pe-5" 
+              className="rounded-pill pe-5"
               style={{
-                 
                 borderRadius: "50px",
                 paddingRight: "5px",
-                paddingBottom:"10px"
+                paddingBottom: "10px",
               }}
             />
             <FaSearchPlus

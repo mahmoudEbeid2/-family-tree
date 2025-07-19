@@ -4,7 +4,8 @@
   justify-content: center;
   gap: 30px;
   padding: 40px 20px;
-  background-color: #F5E6CA;
+  background-color: #f5e6ca;
   overflow: auto;
-
+  width: 100%;
+  height: 100vh;
 }

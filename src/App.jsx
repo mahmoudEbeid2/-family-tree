@@ -5,34 +5,20 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { family } from "./data/family";
+import { family, family_name } from "./data/family";
 
 import TreeMode from "./pages/TreeMode";
 import CardsPage from "./pages/cardsPage";
 import FoucsMode from "./pages/FoucsMode";
-import PasswordGate from "./Components/PasswordGate/PasswordGate";
-import StatsCards from "./Components/StatsModal/StatsModal";
-
+import NavbarComponent from "./Components/Navbar/Navbar";
 function App() {
-  const [showLogin, setShowLogin] = useState(true);
-
-  function handlePasswordSubmit() {
-    setShowLogin(false);
-  }
-
-  if (showLogin) {
-    return <PasswordGate onSubmit={handlePasswordSubmit} />;
-  }
-
   return (
     <Router>
+      <NavbarComponent family={family_name.name} />
       <Routes>
-        <Route path="/" element={<StatsCards family={family} />} />
-        <Route path="/tree" element={<TreeMode family={family} />} />
+        <Route path="/" element={<TreeMode family={family} />} />
         <Route path="/cards" element={<CardsPage family={family} />} />
         <Route path="/focus" element={<FoucsMode family={family} />} />
-
-        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
