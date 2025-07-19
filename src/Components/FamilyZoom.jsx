@@ -192,7 +192,7 @@ export default function FamilyZoom({ family, showNavbar }) {
         collapsible={false}
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 180, y: 320 }}
+        nodeSize={{ x: 150, y: 550 }}
       />
 
       {selectedPerson && (
