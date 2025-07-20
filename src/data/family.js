@@ -1,4 +1,3 @@
-export const correctPassword = "123456"
 export const family_name = {
   name: "شجرة العائلة"
 };

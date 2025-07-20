@@ -60,6 +60,26 @@ export default function NavbarComponent({ toggleNavbar, showNavbar }) {
               <span>{family_name.name}</span>
             </Navbar.Brand>
 
+            {/* Collapse Navbar button */}
+            <Button
+              onClick={toggleNavbar}
+              variant="light"
+              id="collapse-button"
+              className=" ms-2"
+              style={{
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                width: "40px",
+                height: "37px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "1px 10px",
+              }}
+            >
+              <BiFullscreen size={18} color="#555" />
+            </Button>
+
             {/* Collapsible content */}
             <Navbar.Collapse id="navbar-collapse">
               <Nav
@@ -116,26 +136,6 @@ export default function NavbarComponent({ toggleNavbar, showNavbar }) {
                 </div>
               </Nav>
             </Navbar.Collapse>
-
-            {/* Collapse Navbar button */}
-            <Button
-              onClick={toggleNavbar}
-              variant="light"
-              id="collapse-button"
-              className=" ms-2"
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                width: "40px",
-                height: "37px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "1px 10px",
-              }}
-            >
-              <BiFullscreen size={18} color="#555" />
-            </Button>
           </Container>
         </Navbar>
       )}

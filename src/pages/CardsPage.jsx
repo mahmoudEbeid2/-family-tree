@@ -22,8 +22,6 @@ function CardsPage({ family }) {
     );
 
     setFilteredFamily(filtered);
-
-    console.log("🔍 تم التصفية بناءً على:", searchQuery, filtered.length);
   }, [location.search, family]);
 
   if (!family || !Array.isArray(family)) return null;

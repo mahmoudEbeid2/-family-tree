@@ -59,6 +59,9 @@
   object-fit: cover;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
@@ -80,7 +83,7 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #222;
+  color: #944c4c;
 }
 
 .social-icons {
@@ -107,7 +110,7 @@
   font-size: 24px;
   font-weight: 900;
   margin-bottom: 8px;
-  color: #111;
+  color: #100f0f;
 }
 
 .centered-icons {
@@ -228,7 +231,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #f0f0f0; /* الخلفية الرمادي الفاتح */
+  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,17 +240,16 @@
   font-size: 14px;
 }
 
-/* لون الأيقونات */
 .social-icons .facebook svg {
-  color: #1877f2; /* أزرق فيسبوك */
+  color: #1877f2;
 }
 
 .social-icons .mail svg {
-  color: #ea4335; /* أحمر Gmail */
+  color: #ea4335;
 }
 
 .social-icons .phone svg {
-  color: #34a853; /* أخضر واتساب أو تليفون */
+  color: #34a853;
 }
 .data {
   font-weight: 500;
@@ -270,11 +272,46 @@
   .person-modal {
     flex-direction: column;
     align-items: center;
+    padding: 18px 8px 18px 8px;
+    gap: 18px;
+    max-width: 400px;
+    margin: auto;
+  }
+  .person-img {
+    width: 140px;
+    height: 140px;
+  }
+}
+@media (max-width: 413px) {
+  .person-modal {
+    flex-direction: column;
+    align-items: center;
     padding: 18px 8px 18px 48px;
     gap: 18px;
   }
   .person-img {
     width: 140px;
     height: 140px;
+  }
+  .nav-link {
+    font-size: 14px;
+
+    padding: 5px;
+  }
+  .centered-name {
+    font-size: 20px;
+  }
+  .nav.nav-tabs {
+    gap: 12px;
+  }
+}
+@media (max-width: 385px) {
+  .nav-link {
+    font-size: 12px;
+
+    padding: 5px;
+  }
+  .nav.nav-tabs {
+    gap: 6px;
   }
 }

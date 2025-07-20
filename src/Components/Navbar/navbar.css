@@ -37,26 +37,30 @@
   }
 }
 
-/* ✅ موبايل فقط: وسط اللوجو */
-@media (max-width: 991.98px) {
-  .navbar .navbar-brand {
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    top: 50%;
-    transform: translate(50%, -50%);
-  }
+#collapse-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 
-  /* عشان نمنع تأثير الـ margin العادية */
-  .navbar .navbar-brand.me-3 {
-    margin-right: 0 !important;
+@media (max-width: 992px) {
+  #collapse-button {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
   }
 }
 
-/* ✅ شاشات كبيرة: خليه يمين عادي */
-@media (min-width: 992px) {
-  .navbar .navbar-brand {
-    position: static;
-    transform: none;
-  }
+.navbar-toggler {
+  padding: 6px 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggler-icon {
+  background-size: 80% 80%;
 }
