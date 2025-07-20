@@ -121,7 +121,8 @@ export default function NavbarComponent({ toggleNavbar, showNavbar }) {
             <Button
               onClick={toggleNavbar}
               variant="light"
-              className="d-none d-lg-block ms-2"
+              id="collapse-button"
+              className=" ms-2"
               style={{
                 border: "1px solid #ccc",
                 borderRadius: "8px",

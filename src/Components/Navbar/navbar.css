@@ -36,3 +36,27 @@
     margin-top: 10px;
   }
 }
+
+/* ✅ موبايل فقط: وسط اللوجو */
+@media (max-width: 991.98px) {
+  .navbar .navbar-brand {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    top: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  /* عشان نمنع تأثير الـ margin العادية */
+  .navbar .navbar-brand.me-3 {
+    margin-right: 0 !important;
+  }
+}
+
+/* ✅ شاشات كبيرة: خليه يمين عادي */
+@media (min-width: 992px) {
+  .navbar .navbar-brand {
+    position: static;
+    transform: none;
+  }
+}
