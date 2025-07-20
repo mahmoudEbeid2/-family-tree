@@ -1,14 +1,43 @@
 import React, { useState } from "react";
-import { X, Facebook, Mail, Phone } from "lucide-react";
+import {
+  X,
+  Facebook,
+  Mail,
+  Phone,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import "./PersonDetailsModal.css";
 
 const PersonDetailsModal = ({ person, onClose }) => {
   const [activeTab, setActiveTab] = useState("info");
-  const [enlargedPhoto, setEnlargedPhoto] = useState(null);
+  const [enlargedPhotoIndex, setEnlargedPhotoIndex] = useState(null);
 
   const age = person.deathYear
     ? person.deathYear - person.birthYear
     : new Date().getFullYear() - person.birthYear;
+
+  const handleEnlarge = (index) => {
+    setEnlargedPhotoIndex(index);
+  };
+
+  const closeEnlarged = () => {
+    setEnlargedPhotoIndex(null);
+  };
+
+  const prevPhoto = (e) => {
+    e.stopPropagation();
+    setEnlargedPhotoIndex((prev) =>
+      prev > 0 ? prev - 1 : person.photos.length - 1
+    );
+  };
+
+  const nextPhoto = (e) => {
+    e.stopPropagation();
+    setEnlargedPhotoIndex((prev) =>
+      prev < person.photos.length - 1 ? prev + 1 : 0
+    );
+  };
 
   return (
     <div className="person-modal">
@@ -22,7 +51,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
 
         <div className="social-icons centered-icons">
           <a
-            href={`${person.contact.facebook}|| "https://www.facebook.com/"}`}
+            href={person.contact.facebook || "https://www.facebook.com/"}
             target="_blank"
             rel="noopener noreferrer"
             className="icon facebook"
@@ -123,7 +152,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
                     src={img}
                     alt={`photo-${i}`}
                     className="photo-thumb"
-                    onClick={() => setEnlargedPhoto(img)}
+                    onClick={() => handleEnlarge(i)}
                     style={{ cursor: "zoom-in" }}
                   />
                 ))
@@ -135,15 +164,67 @@ const PersonDetailsModal = ({ person, onClose }) => {
         </div>
       </div>
 
-      {enlargedPhoto && (
-        <div className="photo-overlay" onClick={() => setEnlargedPhoto(null)}>
-          <button
-            className="close-enlarged"
-            onClick={() => setEnlargedPhoto(null)}
-          >
+      {enlargedPhotoIndex !== null && (
+        <div className="photo-overlay" onClick={closeEnlarged}>
+          <button className="close-enlarged" onClick={closeEnlarged}>
             <X size={24} />
           </button>
-          <img src={enlargedPhoto} alt="enlarged" className="enlarged-img" />
+
+          {/* Prev */}
+          <button
+            className="nav-arrow left"
+            onClick={prevPhoto}
+            style={{
+              position: "absolute",
+              left: "20%",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(0, 0, 0, 0.5)",
+              color: "white",
+              border: "none",
+              borderRadius: "50%",
+              width: "36px",
+              height: "36px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 10,
+            }}
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          {/* Next */}
+          <button
+            className="nav-arrow right"
+            onClick={nextPhoto}
+            style={{
+              position: "absolute",
+              right: "20%",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(0, 0, 0, 0.5)",
+              color: "white",
+              border: "none",
+              borderRadius: "50%",
+              width: "36px",
+              height: "36px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 10,
+            }}
+          >
+            <ChevronRight size={22} />
+          </button>
+
+          <img
+            src={person.photos[enlargedPhotoIndex]}
+            alt="enlarged"
+            className="enlarged-img"
+          />
         </div>
       )}
     </div>

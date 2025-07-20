@@ -315,3 +315,39 @@
     gap: 6px;
   }
 }
+
+@media (max-width: 1255px) {
+  .nav-arrow.left {
+    left: 5% !important;
+  }
+
+  .nav-arrow.right {
+    right: 5% !important;
+  }
+}
+@media (max-width: 820px) {
+  .nav-arrow.left {
+    left: 1% !important;
+  }
+
+  .nav-arrow.right {
+    right: 1% !important;
+  }
+  .enlarged-img {
+    max-width: 80%;
+    max-height: 80%;
+  }
+}
+@media (max-width: 735px) {
+  .nav-arrow.left {
+    left: 0 !important;
+  }
+  .enlarged-img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+
+  .nav-arrow.right {
+    right: 0 !important;
+  }
+}

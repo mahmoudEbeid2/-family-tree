@@ -11,7 +11,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
       <g style={{ cursor: "pointer" }}>
         <rect
           x="-80"
-          y="-160"
+          y="-130"
           width="150"
           height="180"
           rx="0"
@@ -23,14 +23,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           onClick={() => handleDisplay(nodeDatum)}
           href={nodeDatum.imageUrl}
           x="-70"
-          y="-150"
+          y="-120"
           width="130"
           height="130"
         />
         <circle
           onClick={() => handlePersonClick(nodeDatum)}
           cx="47"
-          cy="-135"
+          cy="-106"
           r="10"
           fill="white"
           stroke="none"
@@ -39,14 +39,14 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
           onClick={() => handlePersonClick(nodeDatum)}
           href={InfoCon}
           x="39"
-          y="-143"
+          y="-114"
           width="16"
           height="16"
         />
         <text
           fill="#fff"
           x="-5"
-          y="-5"
+          y="25"
           fontSize={11}
           fontFamily="cairo, sans-serif"
           fontWeight="100"
@@ -67,7 +67,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
         <text
           fill="#888"
           x="-5"
-          y="10"
+          y="40"
           fontSize={8}
           fontFamily="cairo, sans-serif"
           fontWeight="100"
@@ -92,7 +92,7 @@ const renderCustomNode = ({ nodeDatum }, handlePersonClick, handleDisplay) => {
   }
 
   return (
-    <foreignObject width="200" height="430" x="-100" y="-160">
+    <foreignObject width="200" height="430" x="-100" y="-140">
       <div style={{ width: "200px", height: "430px" }}>
         <FamilyCard
           person={nodeDatum}
@@ -171,7 +171,7 @@ export default function FamilyTree({ family, showNavbar }) {
         collapsible={false}
         scaleExtent={{ min: 0.5, max: 2 }}
         separation={{ siblings: 1.5, nonSiblings: 2 }}
-        nodeSize={{ x: 150, y: 550 }}
+        nodeSize={{ x: 150, y: 420 }}
       />
 
       {selectedPerson && (
