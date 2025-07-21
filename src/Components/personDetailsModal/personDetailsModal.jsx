@@ -13,6 +13,15 @@ const PersonDetailsModal = ({ person, onClose }) => {
   const [activeTab, setActiveTab] = useState("info");
   const [enlargedPhotoIndex, setEnlargedPhotoIndex] = useState(null);
   const overlayRef = useRef(null);
+  const [isIOS, setIsIOS] = useState(false);
+
+  // Detect iOS devices
+  useEffect(() => {
+    const ua = window.navigator.userAgent;
+    if (/iPad|iPhone|iPod/.test(ua)) {
+      setIsIOS(true);
+    }
+  }, []);
 
   const age = person.deathYear
     ? person.deathYear - person.birthYear
@@ -38,8 +47,9 @@ const PersonDetailsModal = ({ person, onClose }) => {
     );
   };
 
+  // iOS Swipe support
   useEffect(() => {
-    if (!overlayRef.current || enlargedPhotoIndex === null) return;
+    if (!overlayRef.current || enlargedPhotoIndex === null || !isIOS) return;
 
     let startX = 0;
 
@@ -52,9 +62,9 @@ const PersonDetailsModal = ({ person, onClose }) => {
       const diff = endX - startX;
 
       if (diff > 50) {
-        prevPhoto(); // Swipe Right
+        prevPhoto();
       } else if (diff < -50) {
-        nextPhoto(); // Swipe Left
+        nextPhoto();
       }
     };
 
@@ -66,7 +76,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
       overlay.removeEventListener("touchstart", handleTouchStart);
       overlay.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [enlargedPhotoIndex]);
+  }, [enlargedPhotoIndex, isIOS]);
 
   return (
     <div className="person-modal">
@@ -205,65 +215,69 @@ const PersonDetailsModal = ({ person, onClose }) => {
             <X size={24} />
           </button>
 
-          {/* Prev */}
-          <button
-            className="nav-arrow left"
-            onClick={(e) => {
-              e.stopPropagation();
-              prevPhoto();
-            }}
-            style={{
-              position: "absolute",
-              left: "20%",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "rgba(0, 0, 0, 0.5)",
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: "36px",
-              height: "36px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 999,
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
-          >
-            <ChevronLeft size={22} />
-          </button>
+          {!isIOS && (
+            <>
+              {/* Prev */}
+              <button
+                className="nav-arrow left"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevPhoto();
+                }}
+                style={{
+                  position: "absolute",
+                  left: "20%",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "rgba(0, 0, 0, 0.5)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "36px",
+                  height: "36px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 999,
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              >
+                <ChevronLeft size={22} />
+              </button>
 
-          {/* Next */}
-          <button
-            className="nav-arrow right"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextPhoto();
-            }}
-            style={{
-              position: "absolute",
-              right: "20%",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "rgba(0, 0, 0, 0.5)",
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: "36px",
-              height: "36px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 999,
-              touchAction: "manipulation",
-              WebkitTapHighlightColor: "transparent",
-            }}
-          >
-            <ChevronRight size={22} />
-          </button>
+              {/* Next */}
+              <button
+                className="nav-arrow right"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextPhoto();
+                }}
+                style={{
+                  position: "absolute",
+                  right: "20%",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "rgba(0, 0, 0, 0.5)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "36px",
+                  height: "36px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 999,
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                }}
+              >
+                <ChevronRight size={22} />
+              </button>
+            </>
+          )}
 
           <img
             src={person.photos[enlargedPhotoIndex]}
