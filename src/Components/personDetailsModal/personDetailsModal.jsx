@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   X,
   Facebook,
@@ -12,6 +12,7 @@ import "./PersonDetailsModal.css";
 const PersonDetailsModal = ({ person, onClose }) => {
   const [activeTab, setActiveTab] = useState("info");
   const [enlargedPhotoIndex, setEnlargedPhotoIndex] = useState(null);
+  const overlayRef = useRef(null);
 
   const age = person.deathYear
     ? person.deathYear - person.birthYear
@@ -36,6 +37,36 @@ const PersonDetailsModal = ({ person, onClose }) => {
       prev < person.photos.length - 1 ? prev + 1 : 0
     );
   };
+
+  useEffect(() => {
+    if (!overlayRef.current || enlargedPhotoIndex === null) return;
+
+    let startX = 0;
+
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+
+      if (diff > 50) {
+        prevPhoto(); // Swipe Right
+      } else if (diff < -50) {
+        nextPhoto(); // Swipe Left
+      }
+    };
+
+    const overlay = overlayRef.current;
+    overlay.addEventListener("touchstart", handleTouchStart);
+    overlay.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      overlay.removeEventListener("touchstart", handleTouchStart);
+      overlay.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [enlargedPhotoIndex]);
 
   return (
     <div className="person-modal">
@@ -163,7 +194,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
       </div>
 
       {enlargedPhotoIndex !== null && (
-        <div className="photo-overlay" onClick={closeEnlarged}>
+        <div className="photo-overlay" onClick={closeEnlarged} ref={overlayRef}>
           <button
             className="close-enlarged"
             onClick={(e) => {
@@ -197,6 +228,8 @@ const PersonDetailsModal = ({ person, onClose }) => {
               alignItems: "center",
               justifyContent: "center",
               zIndex: 999,
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
             }}
           >
             <ChevronLeft size={22} />
@@ -225,6 +258,8 @@ const PersonDetailsModal = ({ person, onClose }) => {
               alignItems: "center",
               justifyContent: "center",
               zIndex: 999,
+              touchAction: "manipulation",
+              WebkitTapHighlightColor: "transparent",
             }}
           >
             <ChevronRight size={22} />

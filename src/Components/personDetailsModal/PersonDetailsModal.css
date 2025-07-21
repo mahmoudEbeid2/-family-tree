@@ -351,3 +351,7 @@
     right: 0 !important;
   }
 }
+.nav-arrow {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
