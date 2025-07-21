@@ -15,12 +15,13 @@ function CardsPage({ family }) {
     const searchParams = new URLSearchParams(location.search);
     const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-    const filtered = family.filter(
-      (person) =>
-        typeof person.name === "string" &&
-        person.name.toLowerCase().includes(searchQuery)
-    );
-
+    const filtered = searchQuery
+      ? family.filter(
+          (person) =>
+            typeof person.name === "string" &&
+            person.name.toLowerCase().includes(searchQuery)
+        )
+      : family;
     setFilteredFamily(filtered);
   }, [location.search, family]);
 

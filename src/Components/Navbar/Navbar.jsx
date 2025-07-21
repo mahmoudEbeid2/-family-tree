@@ -25,14 +25,12 @@ export default function NavbarComponent({ toggleNavbar, showNavbar }) {
   const closeStats = () => setShowStats(false);
 
   useEffect(() => {
-    const encodedQuery = encodeURIComponent(searchQuery.trim());
-
     if (firstSearch) {
       setFirstSearch(false);
       return;
     }
 
-    if (!searchQuery.trim()) return;
+    const encodedQuery = encodeURIComponent(searchQuery.trim());
 
     navigate(`/cards?search=${encodedQuery}`, { replace: true });
   }, [searchQuery]);

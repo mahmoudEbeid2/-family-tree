@@ -25,15 +25,13 @@ const PersonDetailsModal = ({ person, onClose }) => {
     setEnlargedPhotoIndex(null);
   };
 
-  const prevPhoto = (e) => {
-    e.stopPropagation();
+  const prevPhoto = () => {
     setEnlargedPhotoIndex((prev) =>
       prev > 0 ? prev - 1 : person.photos.length - 1
     );
   };
 
-  const nextPhoto = (e) => {
-    e.stopPropagation();
+  const nextPhoto = () => {
     setEnlargedPhotoIndex((prev) =>
       prev < person.photos.length - 1 ? prev + 1 : 0
     );
@@ -166,14 +164,23 @@ const PersonDetailsModal = ({ person, onClose }) => {
 
       {enlargedPhotoIndex !== null && (
         <div className="photo-overlay" onClick={closeEnlarged}>
-          <button className="close-enlarged" onClick={closeEnlarged}>
+          <button
+            className="close-enlarged"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeEnlarged();
+            }}
+          >
             <X size={24} />
           </button>
 
           {/* Prev */}
           <button
             className="nav-arrow left"
-            onClick={prevPhoto}
+            onClick={(e) => {
+              e.stopPropagation();
+              prevPhoto();
+            }}
             style={{
               position: "absolute",
               left: "20%",
@@ -189,7 +196,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              zIndex: 10,
+              zIndex: 999,
             }}
           >
             <ChevronLeft size={22} />
@@ -198,7 +205,10 @@ const PersonDetailsModal = ({ person, onClose }) => {
           {/* Next */}
           <button
             className="nav-arrow right"
-            onClick={nextPhoto}
+            onClick={(e) => {
+              e.stopPropagation();
+              nextPhoto();
+            }}
             style={{
               position: "absolute",
               right: "20%",
@@ -214,7 +224,7 @@ const PersonDetailsModal = ({ person, onClose }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              zIndex: 10,
+              zIndex: 999,
             }}
           >
             <ChevronRight size={22} />
