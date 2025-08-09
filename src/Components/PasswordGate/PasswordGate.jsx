@@ -27,7 +27,11 @@ const PasswordGate = ({ onSuccess }) => {
             onChange={(e) => setInput(e.target.value)}
           />
           {error && <p className="error">{error}</p>}
-          <button type="submit">عرض</button>
+        <div className="d-grid">
+          <small className="hint mb-2"> تلميح: كلمة المرور هي 123456</small>
+                             <button type="submit">عرض</button>
+
+        </div>
         </form>
       </div>
     </div>
